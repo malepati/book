@@ -64,12 +64,9 @@ __start(){
 __load_data(){
   while : ; do
     if cqlsh -u cassandra -p cassandra -e 'LIST ROLES;' > /dev/null 2>&1; then
-      sleep 5s
-      echo 'Writing data to cassandra'
       exec cqlsh -u cassandra -p cassandra -f /tmp/demo.cql
       break
     else
-      echo 'Cassandra is still starting, will sleep for 10s ...'
       sleep 10
     fi
   done &
